@@ -3,6 +3,13 @@
   "rules": {
     "quotemark": [true, "single"],
     "trailing-comma": false,
-    "member-ordering": [true, { "order": "fields-first" }]
+    "member-ordering": [true, { "order": "fields-first" }],
+    "completed-docs": [
+      true,
+      {
+        "methods": { "privacies": ["public", "protected"] },
+        "properties": true
+      }
+    ]
   }
 }
