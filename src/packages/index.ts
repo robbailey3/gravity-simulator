@@ -1,2 +1,3 @@
-export { Canvas } from './canvas';
-export { GameEngine, Vector } from './game-engine';
+export * from './canvas';
+export * from './game-engine';
+export * from './game-objects';

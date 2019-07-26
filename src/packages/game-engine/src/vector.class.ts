@@ -25,6 +25,9 @@ export class Vector {
     return new Vector(obj.x, obj.y, obj.z);
   }
 
+  public static clone(vector: Vector) {
+    return Vector.fromObject(vector);
+  }
   /**
    * Creates a new vector which is the sum of two vectors
    * @param v1 A vector instance
@@ -125,13 +128,18 @@ export class Vector {
   /**
    * Multiplies the current vector by the specified
    * number
-   * @param n the number to multiply the vectory by
+   * @param n the number to multiply the vector by
    * @returns a new Vector
    */
   public times(n: number) {
     return Vector.times(this, n);
   }
 
+  /**
+   * Divides the current vector by the specified number
+   * @param n The number to divide the vector by
+   * @returns A new Vector
+   */
   public divide(n: number) {
     return Vector.divide(this, n);
   }
@@ -150,7 +158,7 @@ export class Vector {
    * Calculates the cross product between the
    * current vector and the specified vector
    * @param v2 A vector instance
-   * @returns
+   * @returns a new Vector
    */
   public cross(v2: Vector) {
     return Vector.cross(this, v2);

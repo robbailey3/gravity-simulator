@@ -7,9 +7,34 @@
     "completed-docs": [
       true,
       {
-        "methods": { "privacies": ["public", "protected"] },
-        "properties": true
+        "classes": {
+          "visibilities": ["exported"]
+        },
+        "enums": {
+          "visibilities": ["exported"]
+        },
+        "functions": {
+          "visibilities": ["exported"]
+        },
+        "interfaces": {
+          "visibilities": ["exported"]
+        },
+        "methods": true,
+        "namespaces": {
+          "visibilities": ["exported"]
+        },
+        "properties": {
+          "locations": "all",
+          "privacies": ["protected", "public"]
+        },
+        "types": {
+          "visibilities": ["exported"]
+        },
+        "variables": {
+          "visibilities": ["exported"]
+        }
       }
-    ]
+    ],
+    "interface-name": false
   }
 }
