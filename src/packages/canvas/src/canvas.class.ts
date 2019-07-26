@@ -42,6 +42,7 @@ export class Canvas {
    */
   public fillBackground(color: string = this.defaults.backgroundColor) {
     this.ctx.save();
+    this.ctx.clearRect(0, 0, this.el.width, this.el.height);
     this.ctx.fillStyle = color;
     this.ctx.fillRect(0, 0, this.el.width, this.el.height);
     this.ctx.restore();
