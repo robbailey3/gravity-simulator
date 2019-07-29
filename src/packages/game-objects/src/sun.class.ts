@@ -1,8 +1,8 @@
-import { GameObject } from './game-object.class';
-import { Vector } from '../../game-engine';
 import { Canvas } from '../../canvas';
+import { Vector } from '../../game-engine';
+import { GameObject } from './game-object.class';
 
-export class BlackHole extends GameObject {
+export class Sun extends GameObject {
   constructor(
     position: Vector,
     radius: number,
@@ -19,10 +19,10 @@ export class BlackHole extends GameObject {
       this.position.x,
       this.position.y,
       this.radius,
-      '#000',
+      '#FDB813',
       {
-        shadowBlur: 15,
-        shadowColor: '#fff',
+        shadowBlur: 50,
+        shadowColor: '#FDB813',
         shadowOffsetX: 0,
         shadowOffsetY: 0
       }

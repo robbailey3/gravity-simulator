@@ -1,3 +1,3 @@
 export { GameObject } from './src/game-object.class';
-export { BlackHole } from './src/black-hole.class';
+export { Sun } from './src/sun.class';
 export { Planet } from './src/planet.class';

@@ -22,10 +22,10 @@ export class Planet extends GameObject {
       this.position.x,
       this.position.y,
       this.radius,
-      '#fafafa',
+      '#e1a95f',
       {
-        shadowBlur: 10,
-        shadowColor: '#ccc',
+        shadowBlur: 15,
+        shadowColor: '#fff',
         shadowOffsetX: 0,
         shadowOffsetY: 1
       }
@@ -39,10 +39,9 @@ export class Planet extends GameObject {
    */
   public move() {
     this.previousPositions.push(this.position);
-    if (this.previousPositions.length > 100) {
+    if (this.previousPositions.length > 10) {
       this.previousPositions.shift();
     }
     this.position = this.position.add(this.velocity);
-    console.log(this);
   }
 }

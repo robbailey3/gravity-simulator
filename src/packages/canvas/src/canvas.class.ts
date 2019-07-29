@@ -16,7 +16,11 @@ export class Canvas {
    * The default configuration of the class
    * @private
    */
-  private defaults = { backgroundColor: '#0f0f0f', fillColor: '#333' };
+  private defaults = {
+    backgroundColor: '#0f0f0f',
+    fillColor: '#333',
+    strokeColor: '#fff'
+  };
 
   constructor(hostElementSelector: string = 'body') {
     this.el = document.createElement('canvas');
@@ -68,6 +72,20 @@ export class Canvas {
     }
     this.ctx.fill();
     this.ctx.closePath();
+    this.ctx.restore();
+  }
+
+  public drawLine(
+    from: Vector,
+    to: Vector,
+    color: string = this.defaults.strokeColor
+  ) {
+    this.ctx.save();
+    this.ctx.strokeStyle = color;
+    this.ctx.beginPath();
+    this.ctx.moveTo(from.x, from.y);
+    this.ctx.lineTo(to.x, to.y);
+    this.ctx.stroke();
     this.ctx.restore();
   }
 }
