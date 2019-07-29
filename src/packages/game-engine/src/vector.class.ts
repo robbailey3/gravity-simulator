@@ -34,10 +34,18 @@ export class Vector {
    * @param v2 A second vector instance
    * @returns
    */
+  public static minus(v1: Vector, v2: Vector): Vector {
+    return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+  }
+  /**
+   * Creates a new vector which is the sum of two vectors
+   * @param v1 A vector instance
+   * @param v2 A second vector instance
+   * @returns
+   */
   public static add(v1: Vector, v2: Vector): Vector {
     return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
   }
-
   /**
    * Creates a new vector which is the product of two vectors
    * @param v1 A vector instance
@@ -124,7 +132,14 @@ export class Vector {
   public add(v2: Vector): Vector {
     return Vector.add(this, v2);
   }
-
+  /**
+   * Adds a vector to the current vector instance
+   * @param v2 The vector to add to the current one
+   * @returns a new Vector
+   */
+  public minus(v2: Vector): Vector {
+    return Vector.minus(this, v2);
+  }
   /**
    * Multiplies the current vector by the specified
    * number

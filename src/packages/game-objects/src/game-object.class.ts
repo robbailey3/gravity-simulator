@@ -6,19 +6,19 @@ export abstract class GameObject {
   constructor(
     public position: Vector,
     public radius: number,
-    public weight: number,
+    public mass: number,
     public canvas: Canvas
   ) {}
   /**
    * Draw the object onto the canvas;
    * @abstract
    */
-  public abstract draw();
+  public abstract draw(): void;
 
   /**
    *
    * Move the object on the canvas.
    * @abstract
    */
-  public abstract move();
+  public abstract move(): void;
 }

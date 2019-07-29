@@ -6,11 +6,11 @@ export class Planet extends GameObject {
   constructor(
     position: Vector,
     radius: number,
-    weight: number,
+    mass: number,
     public velocity: Vector,
     canvas: Canvas
   ) {
-    super(position, radius, weight, canvas);
+    super(position, radius, mass, canvas);
     this.draw();
   }
   /**
@@ -21,10 +21,19 @@ export class Planet extends GameObject {
       this.position.x,
       this.position.y,
       this.radius,
-      '#fff'
+      '#fafafa',
+      {
+        shadowBlur: 10,
+        shadowColor: '#ccc',
+        shadowOffsetX: 0,
+        shadowOffsetY: 1
+      }
     );
   }
-  move() {
+  /**
+   * Move the object according to its current velocity vector
+   */
+  public move() {
     this.position = this.position.add(this.velocity);
   }
 }

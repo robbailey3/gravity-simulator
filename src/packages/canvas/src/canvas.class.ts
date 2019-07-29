@@ -14,7 +14,7 @@ export class Canvas {
    * The default configuration of the class
    * @private
    */
-  private defaults = { backgroundColor: '#111', fillColor: '#333' };
+  private defaults = { backgroundColor: '#0f0f0f', fillColor: '#333' };
 
   constructor(hostElementSelector: string = 'body') {
     this.el = document.createElement('canvas');
@@ -42,9 +42,9 @@ export class Canvas {
    */
   public fillBackground(color: string = this.defaults.backgroundColor) {
     this.ctx.save();
-    this.ctx.clearRect(0, 0, this.el.width, this.el.height);
     this.ctx.fillStyle = color;
     this.ctx.fillRect(0, 0, this.el.width, this.el.height);
+    this.ctx.closePath();
     this.ctx.restore();
   }
 
@@ -55,9 +55,9 @@ export class Canvas {
     color: string = this.defaults.fillColor,
     shadow?: CanvasShadowStyles
   ) {
-    this.ctx.save();
     this.ctx.fillStyle = color;
-    this.ctx.ellipse(x, y, radius, radius, 0, 0, Math.PI * 2);
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, radius, 0, Math.PI * 2);
     if (shadow) {
       this.ctx.shadowOffsetX = shadow.shadowOffsetX;
       this.ctx.shadowOffsetY = shadow.shadowOffsetY;
