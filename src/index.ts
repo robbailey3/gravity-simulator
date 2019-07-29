@@ -5,6 +5,13 @@ const canvas = new Canvas();
 const engine = new GameEngine(canvas);
 canvas.setCanvasSize(window.innerWidth, window.innerHeight);
 canvas.fillBackground();
+const bh = new BlackHole(
+  new Vector(window.innerWidth / 2, window.innerHeight / 2, 0),
+  15,
+  1e30,
+  canvas
+);
+engine.gameObjects.push(bh);
 
 // canvas.fillCircle(window.innerWidth / 2, window.innerHeight / 2, 25, '#000', {
 //   shadowBlur: 10,
@@ -19,11 +26,10 @@ canvas.el.addEventListener('mousedown', ($event) => {
 canvas.el.addEventListener('mouseup', ($event) => {
   const deltaX = ($event.clientX - mouseStart.x) / 10;
   const deltaY = ($event.clientY - mouseStart.y) / 10;
-  console.log(deltaX, deltaY);
   const planet = new Planet(
     new Vector($event.clientX, $event.clientY, 0),
     3,
-    1000,
+    1e6,
     new Vector(deltaX, deltaY, 0),
     canvas
   );

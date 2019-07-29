@@ -28,5 +28,7 @@ export class BlackHole extends GameObject {
       }
     );
   }
-  public move() {}
+  public move() {
+    this.position = this.position.add(this.velocity);
+  }
 }

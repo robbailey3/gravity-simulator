@@ -1,3 +1,5 @@
+import { Vector } from '../../game-engine';
+
 export class Canvas {
   /**
    * The Canvas element in the DOM

@@ -26,7 +26,7 @@ export class GameEngine {
     // const interval = setInterval(() => {
     //   this.animate();
     //   clearInterval(interval);
-    // }, 1000);
+    // }, 100);
   }
   private calculateObjectForces() {
     for (let i = 0; i < this.gameObjects.length; i += 1) {
@@ -34,10 +34,10 @@ export class GameEngine {
         if (i === j) {
           continue;
         }
-        let a = this.gameObjects[i];
-        let b = this.gameObjects[j];
+        const a = this.gameObjects[i];
+        const b = this.gameObjects[j];
         const scalarDistanceBetween =
-          1e5 *
+          7.5e4 *
           Math.sqrt(
             Math.pow(a.position.x - b.position.x, 2) +
               Math.pow(a.position.y - b.position.y, 2)
@@ -47,6 +47,7 @@ export class GameEngine {
           (this.constants.G * b.mass) / scalarDistanceBetween ** 3
         );
         a.velocity = a.velocity.add(force);
+        console.log(a, b, force);
       }
     }
   }

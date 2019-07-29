@@ -3,6 +3,7 @@ import { Vector } from '../../game-engine';
 import { GameObject } from './game-object.class';
 
 export class Planet extends GameObject {
+  public previousPositions: Vector[] = [];
   constructor(
     position: Vector,
     radius: number,
@@ -29,11 +30,19 @@ export class Planet extends GameObject {
         shadowOffsetY: 1
       }
     );
+    for (const pos of this.previousPositions) {
+      this.canvas.fillCircle(pos.x, pos.y, 1, '#fff');
+    }
   }
   /**
    * Move the object according to its current velocity vector
    */
   public move() {
+    this.previousPositions.push(this.position);
+    if (this.previousPositions.length > 100) {
+      this.previousPositions.shift();
+    }
     this.position = this.position.add(this.velocity);
+    console.log(this);
   }
 }
