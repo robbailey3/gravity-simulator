@@ -16,7 +16,8 @@ export class Planet extends GameObject {
     radius: number,
     mass: number,
     public velocity: Vector,
-    canvas: Canvas
+    canvas: Canvas,
+    public color: string = '#e1a95f'
   ) {
     super(position, radius, mass, canvas);
     this.draw();
@@ -32,7 +33,7 @@ export class Planet extends GameObject {
       this.position.x,
       this.position.y,
       this.radius,
-      '#e1a95f',
+      this.color,
       {
         shadowBlur: 2,
         shadowColor: '#ddd',

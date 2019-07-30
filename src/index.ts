@@ -28,6 +28,15 @@ const bh = new Sun(
   canvas
 );
 engine.gameObjects.push(bh);
+const earth = new Planet(
+  new Vector(window.innerWidth / 2 - 200, window.innerHeight / 2, 0),
+  5,
+  5e12,
+  new Vector(0, 4.927, 0),
+  canvas,
+  '#0077be'
+);
+engine.gameObjects.push(earth);
 
 let clickPosition;
 canvas.el.addEventListener('mousedown', ($event) => {
