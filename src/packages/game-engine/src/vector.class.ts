@@ -1,3 +1,10 @@
+/**
+ * A class to do things to do with Vectors which
+ * will be used to describe position and movement.
+ * Todo: Work out how to integrate all 3 dimensions into the game
+ * @export
+ * @class Vector
+ */
 export class Vector {
   constructor(
     public x: number = 0,
@@ -25,11 +32,18 @@ export class Vector {
     return new Vector(obj.x, obj.y, obj.z);
   }
 
+  /**
+   * Create a clone of a vector.
+   * @static
+   * @param vector
+   * @returns A copy of the current vector
+   */
   public static clone(vector: Vector) {
     return Vector.fromObject(vector);
   }
+
   /**
-   * Creates a new vector which is the sum of two vectors
+   * Creates a new vector which is Vector1 - Vector2
    * @param v1 A vector instance
    * @param v2 A second vector instance
    * @returns

@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 16px;
 }
 canvas {
   display: block;

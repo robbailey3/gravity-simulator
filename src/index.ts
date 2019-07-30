@@ -4,12 +4,18 @@ import './styles/styles.scss';
 const planetMassInput = document.getElementById(
   'planet-mass'
 ) as HTMLInputElement;
-const planetMass = 1 * Math.pow(10, parseInt(planetMassInput.value, 10));
 
 const planetRadiusInput = document.getElementById(
   'planet-radius'
 ) as HTMLInputElement;
-const planetRadius = parseInt(planetRadiusInput.value, 10);
+
+const forceVectorToggle = document.getElementById(
+  'force-vector'
+) as HTMLInputElement;
+
+forceVectorToggle.addEventListener('change', () => {
+  engine.showForceVector = forceVectorToggle.checked;
+});
 
 const canvas = new Canvas();
 const engine = new GameEngine(canvas);
@@ -23,12 +29,6 @@ const bh = new Sun(
 );
 engine.gameObjects.push(bh);
 
-// canvas.fillCircle(window.innerWidth / 2, window.innerHeight / 2, 25, '#000', {
-//   shadowBlur: 10,
-//   shadowColor: '#fff',
-//   shadowOffsetX: 0,
-//   shadowOffsetY: 0
-// });
 let clickPosition;
 canvas.el.addEventListener('mousedown', ($event) => {
   clickPosition = new Vector($event.clientX, $event.clientY, 0);
@@ -41,6 +41,9 @@ canvas.el.addEventListener('mousemove', ($event) => {
   }
 });
 canvas.el.addEventListener('mouseup', ($event) => {
+  const planetRadius = parseInt(planetRadiusInput.value, 10);
+  const planetMass = 1 * Math.pow(10, parseInt(planetMassInput.value, 10));
+
   engine.isDragging = false;
   engine.dragPosition = undefined;
   const deltaX = ($event.clientX - clickPosition.x) / 10;
@@ -48,7 +51,7 @@ canvas.el.addEventListener('mouseup', ($event) => {
   if ($event.ctrlKey) {
     const sun = new Sun(
       new Vector($event.clientX, $event.clientY, 0),
-      15,
+      50,
       1.989e30,
       canvas
     );
