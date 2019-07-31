@@ -23,7 +23,7 @@ canvas.setCanvasSize(window.innerWidth, window.innerHeight);
 canvas.fillBackground();
 const bh = new Sun(
   new Vector(window.innerWidth / 2, window.innerHeight / 2, 0),
-  40,
+  15,
   1.989e30,
   canvas
 );
@@ -32,11 +32,23 @@ const earth = new Planet(
   new Vector(window.innerWidth / 2 - 200, window.innerHeight / 2, 0),
   5,
   5e12,
-  new Vector(0, 4.927, 0),
+  new Vector(0, 5.161, 0),
   canvas,
   '#0077be'
 );
+earth.trailLength = 2;
 engine.gameObjects.push(earth);
+
+const jupiter = new Planet(
+  new Vector(window.innerWidth / 2 + 250, window.innerHeight / 2, 0),
+  8,
+  5e14,
+  new Vector(0, 4.121, 0),
+  canvas,
+  '#cc1142'
+);
+jupiter.trailLength = 2;
+engine.gameObjects.push(jupiter);
 
 let clickPosition;
 canvas.el.addEventListener('mousedown', ($event) => {

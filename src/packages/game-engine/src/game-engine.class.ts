@@ -9,6 +9,7 @@ import { Vector } from './vector.class';
  * @class GameEngine
  */
 export class GameEngine {
+  public times = [];
   /**
    * An array containing the GameObjects
    */
@@ -51,8 +52,21 @@ export class GameEngine {
    * This method controls the animation and is called via requestAnimationFrame.
    */
   public animate() {
+    let fps;
+    const now = performance.now();
+    while (this.times.length > 0 && this.times[0] <= now - 1000) {
+      this.times.shift();
+    }
+    this.times.push(now);
+    fps = this.times.length;
+    const el = document.getElementById('fps');
+    el.innerHTML = fps;
+
+    console.log('Foo');
+
     this.canvas.fillBackground();
     this.calculateObjectForces();
+    this.calculateGravityVisualisation();
     for (const gameObject of this.gameObjects) {
       gameObject.move();
       gameObject.draw();
@@ -67,6 +81,10 @@ export class GameEngine {
     requestAnimationFrame(() => {
       this.animate();
     });
+    // let timeout = setTimeout(() => {
+    //   this.animate();
+    //   clearTimeout(timeout);
+    // }, 2000);
   }
   /**
    * Draw a line to represent the net force currently
@@ -119,7 +137,38 @@ export class GameEngine {
       }
     }
   }
-
+  private calculateGravityVisualisation() {
+    let x = 0;
+    while (x < this.canvas.el.width) {
+      let y = 0;
+      while (y < this.canvas.el.height) {
+        const currentPosition = new Vector(x, y, 0);
+        this.gameObjects.forEach((obj) => {
+          const scalarDistanceBetween =
+            5e4 *
+            Math.sqrt(
+              Math.pow(currentPosition.x - obj.position.x, 2) +
+                Math.pow(currentPosition.y - obj.position.y, 2)
+            );
+          const BAUnitVector = obj.position.minus(currentPosition).normalize();
+          const force = BAUnitVector.times(
+            (this.constants.G * obj.mass) / scalarDistanceBetween ** 3
+          );
+          const radius = Math.min(force.magnitude(), 10);
+          if (radius > 1) {
+            this.canvas.fillCircle(
+              currentPosition.x,
+              currentPosition.y,
+              radius,
+              '#11111133'
+            );
+          }
+        });
+        y += 30;
+      }
+      x += 30;
+    }
+  }
   /**
    * This method calculates the force applied on each object
    * by every other object. It removes the smaller of the two objects
@@ -138,14 +187,14 @@ export class GameEngine {
         const a = this.gameObjects[i];
         const b = this.gameObjects[j];
         if (this.detectCollision(a, b)) {
-          this.gameObjects.splice(
-            this.gameObjects.indexOf(a.mass > b.mass ? b : a),
-            1
-          );
+          const minMass = a.mass > b.mass ? b : a;
+          const maxMass = a.mass < b.mass ? b : a;
+          // maxMass.mass += minMass.mass;
+          this.gameObjects.splice(this.gameObjects.indexOf(minMass), 1);
           return;
         }
         const scalarDistanceBetween =
-          51470 *
+          5e4 *
           Math.sqrt(
             Math.pow(a.position.x - b.position.x, 2) +
               Math.pow(a.position.y - b.position.y, 2)
