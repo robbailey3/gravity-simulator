@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TypeScript-Webpack-Jasmine</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Gravity Simulator</title>
   </head>
 
   <body>
@@ -15,10 +19,14 @@
           type="range"
           name="planet-mass"
           id="planet-mass"
+          value="12"
           min="10"
           max="29"
           step="1"
         />
+        <span id="planet-mass-value"
+          >1<sup id="planet-mass-exp">12</sup>KG</span
+        >
       </div>
       <div class="form-group">
         <label for="planet-radius">Planet Radius</label>
@@ -26,14 +34,76 @@
           type="range"
           name="planet-radius"
           id="planet-radius"
+          value="4"
           min="1"
           max="25"
           step="1"
         />
+        <span id="planet-radius-value">2.0e+5m</span>
+      </div>
+      <div class="form-group">
+        <label for="planet-radius">Planet Trail Length</label>
+        <input
+          type="range"
+          name="planet-trail"
+          id="planet-trail"
+          value="4"
+          min="1"
+          max="10"
+          step="1"
+        />
+        <span id="planet-trail-value">4</span>
+      </div>
+      <div class="form-group">
+        <label for="planet-color">Planet Colour</label>
+        <input
+          type="color"
+          name="planet-color"
+          id="planet-color"
+          value="#e1a95f"
+        />
+        <span id="planet-color-value">#e1a95f</span>
+      </div>
+      <div class="form-group">
+        <label for="sun-mass">Sun Mass</label>
+        <input
+          type="range"
+          name="sun-mass"
+          id="sun-mass"
+          value="30"
+          min="25"
+          max="40"
+          step="1"
+        />
+        <span id="sun-mass-value">1<sup id="sun-mass-exp">30</sup>KG</span>
+      </div>
+      <div class="form-group">
+        <label for="sun-radius">Sun Radius</label>
+        <input
+          type="range"
+          name="sun-radius"
+          id="sun-radius"
+          value="30"
+          min="20"
+          max="50"
+          step="1"
+        />
+        <span id="sun-radius-value">7.5<sup>5</sup>m</span>
       </div>
       <div class="form-group">
         <label for="force-vector">Show Force Vector?</label>
         <input type="checkbox" name="force-vector" id="force-vector" />
+      </div>
+      <div class="form-group">
+        <label for="gravity-vis">Show Gravity Visualisation?</label>
+        <input type="checkbox" name="gravity-vis" id="gravity-vis" />
+      </div>
+      <div class="help-button">
+        <button id="help-btn">
+          <i class="material-icons">
+            help_outline
+          </i>
+        </button>
       </div>
     </div>
     <div id="fps"></div>

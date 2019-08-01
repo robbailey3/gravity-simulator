@@ -9,6 +9,7 @@ import { Vector } from './vector.class';
  * @class GameEngine
  */
 export class GameEngine {
+  p;
   public times = [];
   /**
    * An array containing the GameObjects
@@ -38,6 +39,11 @@ export class GameEngine {
   public showForceVector: boolean = false;
 
   /**
+   * Whether we should render a nice gravity visualisation
+   * onto the canvas.
+   */
+  public showGravityVisualisation: boolean = false;
+  /**
    * An object containing some constants such as Newton's
    * Gravitational Constant (G).
    * @private
@@ -45,6 +51,7 @@ export class GameEngine {
   private constants = {
     G: 6.67e-11
   };
+
   constructor(public canvas: Canvas) {
     this.animate();
   }
@@ -52,7 +59,7 @@ export class GameEngine {
    * This method controls the animation and is called via requestAnimationFrame.
    */
   public animate() {
-    let fps;
+    let fps: number;
     const now = performance.now();
     while (this.times.length > 0 && this.times[0] <= now - 1000) {
       this.times.shift();
@@ -60,13 +67,11 @@ export class GameEngine {
     this.times.push(now);
     fps = this.times.length;
     const el = document.getElementById('fps');
-    el.innerHTML = fps;
-
-    console.log('Foo');
+    el.innerHTML = fps.toString();
 
     this.canvas.fillBackground();
     this.calculateObjectForces();
-    this.calculateGravityVisualisation();
+    this.drawGravityVisualisation();
     for (const gameObject of this.gameObjects) {
       gameObject.move();
       gameObject.draw();
@@ -81,10 +86,6 @@ export class GameEngine {
     requestAnimationFrame(() => {
       this.animate();
     });
-    // let timeout = setTimeout(() => {
-    //   this.animate();
-    //   clearTimeout(timeout);
-    // }, 2000);
   }
   /**
    * Draw a line to represent the net force currently
@@ -137,7 +138,20 @@ export class GameEngine {
       }
     }
   }
-  private calculateGravityVisualisation() {
+
+  /**
+   * This method calculates the force due to gravity
+   * at numerous points on the canvas and draws a circle.
+   * The radius of this circle is proportionate to the strength
+   * of gravity at that point. A limit of 10 has been
+   * added to the size of the circle to avoid infinitely
+   * large circles.
+   * @private
+   */
+  private drawGravityVisualisation() {
+    if (!this.showGravityVisualisation) {
+      return;
+    }
     let x = 0;
     while (x < this.canvas.el.width) {
       let y = 0;
@@ -169,6 +183,7 @@ export class GameEngine {
       x += 30;
     }
   }
+
   /**
    * This method calculates the force applied on each object
    * by every other object. It removes the smaller of the two objects

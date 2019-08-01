@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
-
 html,
 body {
   padding: 0;
@@ -30,4 +29,16 @@ canvas {
   bottom: 16px;
   left: 16px;
   color: greenyellow;
+}
+#help-btn {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  line-height: 0;
+  padding: 4px;
+  &:hover,
+  &:focus {
+    background: rgba(#fff, 0.2);
+  }
 }
