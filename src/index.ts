@@ -97,6 +97,20 @@ planetColorInput.addEventListener('change', () => {
   planetColorDisplay.innerText = planetColorInput.value;
 });
 
+sunMassInput.addEventListener('change', () => {
+  sunMassDisplay.innerText = sunMassInput.value;
+});
+
+gravityVisToggle.addEventListener('change', () => {
+  engine.showGravityVisualisation = gravityVisToggle.checked;
+});
+
+sunRadiusInput.addEventListener('change', () => {
+  const scale = 5e4;
+  const num = parseInt(sunRadiusInput.value, 10) * scale;
+  sunRadiusDisplay.innerHTML = `${num.toExponential(1)}m`;
+});
+
 forceVectorToggle.addEventListener('change', () => {
   engine.showForceVector = forceVectorToggle.checked;
 });
@@ -114,7 +128,9 @@ canvas.el.addEventListener('mousemove', ($event) => {
 });
 canvas.el.addEventListener('mouseup', ($event) => {
   const planetRadius = parseInt(planetRadiusInput.value, 10);
-  const planetMass = 1 * Math.pow(10, parseInt(planetMassInput.value, 10));
+  const planetMass = Math.pow(10, parseInt(planetMassInput.value, 10));
+  const sunRadius = parseInt(sunRadiusInput.value, 10);
+  const sunMass = Math.pow(10, parseInt(sunMassInput.value, 10));
 
   engine.isDragging = false;
   engine.dragPosition = undefined;
@@ -126,8 +142,8 @@ canvas.el.addEventListener('mouseup', ($event) => {
   if ($event.ctrlKey) {
     const sun = new Sun(
       new Vector($event.clientX, $event.clientY, 0),
-      50,
-      1.989e30,
+      sunRadius,
+      sunMass,
       canvas
     );
     engine.gameObjects.push(sun);
@@ -137,9 +153,10 @@ canvas.el.addEventListener('mouseup', ($event) => {
       planetRadius,
       planetMass,
       new Vector(deltaX, deltaY, 0),
-      canvas
+      canvas,
+      planetColorInput.value
     );
-
+    planet.trailLength = parseInt(planetTrailInput.value, 10);
     engine.gameObjects.push(planet);
   }
 });
