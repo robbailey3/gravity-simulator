@@ -48,33 +48,29 @@ const forceVectorToggle = document.getElementById(
 ) as HTMLInputElement;
 
 const createDefaultPlanets = (cv: Canvas) => {
-  const sun = new Sun(
-    new Vector(window.innerWidth / 2, window.innerHeight / 2, 0),
-    15,
-    1.989e30,
-    cv
-  );
-  const earth = new Planet(
-    new Vector(window.innerWidth / 2 - 200, window.innerHeight / 2, 0),
-    5,
-    5e12,
-    new Vector(0, 5.159, 0),
-    cv,
-    '#0077be'
-  );
-  earth.trailLength = 2;
-  engine.gameObjects.push(earth);
+  const sun = new Sun(new Vector(300, 300, 0), 15, 1.989e30, cv);
+  engine.gameObjects.push(sun);
+  // const earth = new Planet(
+  //   new Vector(window.innerWidth / 2 - 200, window.innerHeight / 2, 0),
+  //   5,
+  //   5e12,
+  //   new Vector(0, 5.159, 0),
+  //   cv,
+  //   '#0077be'
+  // );
+  // earth.trailLength = 2;
+  // engine.gameObjects.push(earth);
 
-  const jupiter = new Planet(
-    new Vector(window.innerWidth / 2 + 250, window.innerHeight / 2, 0),
-    10,
-    5e14,
-    new Vector(0, 4.122, 0),
-    cv,
-    '#cc1142'
-  );
-  jupiter.trailLength = 2;
-  engine.gameObjects.push(sun, earth, jupiter);
+  // const jupiter = new Planet(
+  //   new Vector(window.innerWidth / 2 + 250, window.innerHeight / 2, 0),
+  //   10,
+  //   5e14,
+  //   new Vector(0, 4.122, 0),
+  //   cv,
+  //   '#cc1142'
+  // );
+  // jupiter.trailLength = 2;
+  // engine.gameObjects.push(sun, earth, jupiter);
 };
 
 createDefaultPlanets(canvas);

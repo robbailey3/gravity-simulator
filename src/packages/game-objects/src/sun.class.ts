@@ -27,13 +27,13 @@ export class Sun extends GameObject {
       this.position.x,
       this.position.y,
       this.radius,
-      '#FDB813',
-      {
-        shadowBlur: 50,
-        shadowColor: '#FDB813',
-        shadowOffsetX: 0,
-        shadowOffsetY: 0
-      }
+      '#FDB813'
+      // {
+      //   shadowBlur: 1,
+      //   shadowColor: '#FDB813',
+      //   shadowOffsetX: 0,
+      //   shadowOffsetY: 0
+      // }
     );
   }
   /**

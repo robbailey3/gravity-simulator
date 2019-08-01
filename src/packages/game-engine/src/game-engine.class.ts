@@ -86,6 +86,10 @@ export class GameEngine {
     requestAnimationFrame(() => {
       this.animate();
     });
+    // let timeout = setTimeout(() => {
+    //   clearTimeout(timeout);
+    //   this.animate();
+    // }, 100);
   }
   /**
    * Draw a line to represent the net force currently
@@ -96,6 +100,7 @@ export class GameEngine {
   public drawForceVector(position: Vector, force: Vector) {
     this.canvas.drawLine(position, position.add(force), '#ff0000');
   }
+
   /**
    * This method checks
    * @private
@@ -153,10 +158,12 @@ export class GameEngine {
       return;
     }
     let x = 0;
-    while (x < this.canvas.el.width) {
+    let max = 0;
+    while (x <= this.canvas.el.width) {
       let y = 0;
-      while (y < this.canvas.el.height) {
+      while (y <= this.canvas.el.height) {
         const currentPosition = new Vector(x, y, 0);
+        let forceVector = new Vector(0, 0, 0);
         this.gameObjects.forEach((obj) => {
           const scalarDistanceBetween =
             5e4 *
@@ -165,22 +172,27 @@ export class GameEngine {
                 Math.pow(currentPosition.y - obj.position.y, 2)
             );
           const BAUnitVector = obj.position.minus(currentPosition).normalize();
-          const force = BAUnitVector.times(
-            (this.constants.G * obj.mass) / scalarDistanceBetween ** 3
+          forceVector = forceVector.add(
+            BAUnitVector.times(
+              (this.constants.G * obj.mass) / scalarDistanceBetween ** 3
+            )
           );
-          const radius = Math.min(force.magnitude(), 10);
-          if (radius > 1) {
-            this.canvas.fillCircle(
-              currentPosition.x,
-              currentPosition.y,
-              radius,
-              '#11111133'
-            );
-          }
         });
-        y += 30;
+        const radius = Math.min(forceVector.magnitude(), 10);
+        if (radius > max) {
+          max = radius;
+        }
+        if (radius > 0.5) {
+          this.canvas.fillCircle(
+            currentPosition.x,
+            currentPosition.y,
+            radius,
+            '#cccccc11'
+          );
+        }
+        y += 20;
       }
-      x += 30;
+      x += 20;
     }
   }
 
@@ -219,9 +231,7 @@ export class GameEngine {
           (this.constants.G * b.mass) / scalarDistanceBetween ** 3
         );
         if (this.showForceVector) {
-          if (a instanceof Planet) {
-            this.drawForceVector(a.position, force.times(1000));
-          }
+          this.drawForceVector(a.position, force.times(1000));
         }
         a.velocity = a.velocity.add(force);
       }
